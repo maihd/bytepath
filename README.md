@@ -8,6 +8,7 @@ Purposes
 - Make a complete game without abaddon the project
 - Build and release the complete game
 - Practice yolo game development
+- Practice Lua and Love2D
 
 Acknowledge
 -----------
