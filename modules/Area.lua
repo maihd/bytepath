@@ -28,3 +28,7 @@ function Area:addGameObject(game_object_type, x, y, opts)
     table.insert(self.game_objects, game_object)
     return game_object
 end
+
+function Area:getGameObjects(filter)
+    return Function.filter(self.game_objects, predicate)
+end

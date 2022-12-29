@@ -1,11 +1,15 @@
 -- Deps
 
-require "libraries.luafun.fun" ()
+Function = require "libraries.luafun.fun"
 
 Object = require "libraries.rxi.classic"
 
-require "libraries.input.Input"
-require "libraries.timer.Timer"
+Input = require "libraries.input.Input"
+Timer = require "libraries.timer.Timer"
+
+-- Deps initialization
+
+Function()
 
 -- utils
 
