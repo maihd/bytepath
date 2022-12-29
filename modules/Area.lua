@@ -29,6 +29,38 @@ function Area:addGameObject(game_object_type, x, y, opts)
     return game_object
 end
 
-function Area:getGameObjects(filter)
-    return Function.filter(self.game_objects, predicate)
+function Area:getGameObjects(predicate)
+    return Func.filter(self.game_objects, predicate)
+end
+
+function Area:queryCircleArea(x, y, radius, game_types)
+    return self:getGameObjects(function (game_object) 
+        if Func.index_of(game_object, game_types) then
+            local dx = game_object.x - x
+            local dy = game_object.y - y
+            return dx * dx + dy * dy <= radius * radius 
+        end
+
+        return false
+    end)
+end
+
+function Area:getClosestGameObject(x, y, radius, game_types)
+    return Func.reduce(self:queryCircleArea(x, y, radius), nil, function (closest_game_object, game_object)
+        if not closest_game_object then
+            return game_types
+        end
+
+        local dx0 = game_object.x - x
+        local dy0 = game_object.y - x
+
+        local dx1 = closest_game_object.x - x
+        local dy1 = closest_game_object.y - x
+
+        if dx0 * dx0 + dy0 * dy0 < dx1 * dx1 + dy1 * dy1 then
+            return game_object
+        else
+            return closest_game_object
+        end
+    end)
 end

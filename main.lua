@@ -1,6 +1,6 @@
 -- Deps
 
-Function = require "libraries.luafun.fun"
+Func = require "libraries.luafun.fun"
 
 Object = require "libraries.rxi.classic"
 
