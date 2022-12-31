@@ -6,11 +6,16 @@ function Area:new(room)
 end
 
 function Area:update(dt)
+    if self.world then
+        self.world:update(dt)
+    end
+
     for i = #self.game_objects, 1, -1 do
         local game_object = self.game_objects[i]
         game_object:update(dt)
 
         if game_object.dead then
+            game_object:destroy()
             table.remove(self.game_objects, i)
         end
     end
@@ -63,4 +68,20 @@ function Area:getClosestGameObject(x, y, radius, game_types)
             return closest_game_object
         end
     end)
+end
+
+function Area:addPhysicsWorld()
+    self.world = Physics.newWorld(0, 0, true)
+end
+
+function Area:destroy()
+    for _, game_object in pairs(self.game_objects) do
+        game_object:destroy()
+    end
+    self.game_objects = {}
+
+    if self.world then
+        self.world:destroy()
+        self.world = nil
+    end
 end
