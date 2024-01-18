@@ -16,5 +16,5 @@ Acknowledge
 
 Copyright
 ---------
-- MaiHD @ 2022
+- MaiHD @ 2022 - 2024
 - Unlicensed
