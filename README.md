@@ -22,6 +22,16 @@ Progress
 [x] Chapter 3: Room and Areas
 [x] Chapter 4: Excerises
 [ ] Chapter 5: Game Basics
+[ ] Chapter 6: Player Basics
+[ ] Chapter 7: Player Stats and Attacks
+[ ] Chapter 8: Enemies
+[ ] Chapter 9: Director and Gameplay Loop
+[ ] Chapter 10: Coding Practices
+[ ] Chapter 11: Passives
+[ ] Chapter 12: More Passives
+[ ] Chapter 13: Skill Trees
+[ ] Chapter 14: Console
+[ ] Chapter 15: Final
 
 Copyright
 ---------
