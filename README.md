@@ -15,7 +15,15 @@ Acknowledge
 - [a327ex](https://github.com/a327ex)
 - Love2D author and community
 
+Progress
+--------
+[x] Chapter 1: Game Loop
+[x] Chapter 2: Libraries
+[x] Chapter 3: Room and Areas
+[x] Chapter 4: Excerises
+[ ] Chapter 5: Game Basics
+
 Copyright
 ---------
-- MaiHD @ 2022
+- MaiHD @ 2022 - 2024
 - Unlicensed

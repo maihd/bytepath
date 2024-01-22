@@ -44,7 +44,7 @@ function love.load()
     camera = Camera()
 
     -- Input bindings
-    
+
     input:bind("a", "left")
     input:bind("d", "right")
     input:bind("left", "left")
@@ -92,7 +92,7 @@ function addRoom(room_type, room_name, ...)
 end
 
 function gotoRoom(room_type, room_name, ...)
-    if current_room and current_room.destroy then 
+    if current_room and current_room.destroy then
         current_room:destroy()
     end
 
@@ -115,14 +115,14 @@ function count_all(f)
     count_table = function(t)
         if seen[t] then return end
             f(t)
-	    seen[t] = true
-	    for k,v in pairs(t) do
-	        if type(v) == "table" then
-		    count_table(v)
-	        elseif type(v) == "userdata" then
-		    f(v)
-	        end
-	end
+        seen[t] = true
+        for k,v in pairs(t) do
+            if type(v) == "table" then
+            count_table(v)
+            elseif type(v) == "userdata" then
+            f(v)
+            end
+        end
     end
     count_table(_G)
 end
@@ -141,10 +141,11 @@ global_type_table = nil
 function type_name(o)
     if global_type_table == nil then
         global_type_table = {}
-            for k,v in pairs(_G) do
-	        global_type_table[v] = k
-	    end
-	global_type_table[0] = "table"
+        for k,v in pairs(_G) do
+            global_type_table[v] = k
+        end
+        global_type_table[0] = "table"
     end
+    
     return global_type_table[getmetatable(o) or 0] or "Unknown"
 end
