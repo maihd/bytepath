@@ -10,11 +10,6 @@ Purposes
 - Practice yolo game development
 - Practice Lua and Love2D
 
-Acknowledge
------------
-- [a327ex](https://github.com/a327ex)
-- Love2D author and community
-
 Progress
 --------
 [x] Chapter 1: Game Loop
@@ -32,6 +27,20 @@ Progress
 [ ] Chapter 13: Skill Trees
 [ ] Chapter 14: Console
 [ ] Chapter 15: Final
+
+Libraries
+---------
+- [camera](https://github.com/a327ex/ModifiedCamera)
+- [a327ex/input](https://github.com/a327ex/boipushy)
+- [luafun](https://github.com/luafun/luafun) instead of [Moses](https://github.com/Yonaba/Moses)
+- [rxi/classic](https://github.com/rxi/classic)
+- [hump/timer](https://github.com/vrld/hump/blob/master/timer.lua)
+- [windfield](https://github.com/a327ex/windfield)
+
+Acknowledge
+-----------
+- [a327ex](https://github.com/a327ex)
+- Love2D author and community
 
 Copyright
 ---------
