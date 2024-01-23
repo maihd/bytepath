@@ -1,8 +1,13 @@
+-- Base data structure and runtime
+
+require "modules.base.class"
+
 -- Deps
 
 Func = require "libraries.luafun.fun"
 
-Object = require "libraries.rxi.classic"
+-- Object = require "libraries.rxi.classic"
+Object = class("Object")
 
 Input = require "libraries.input.Input"
 Timer = require "libraries.timer.Timer"
@@ -146,6 +151,6 @@ function type_name(o)
         end
         global_type_table[0] = "table"
     end
-    
+
     return global_type_table[getmetatable(o) or 0] or "Unknown"
 end
