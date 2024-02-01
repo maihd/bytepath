@@ -1,4 +1,4 @@
-Stage = Object:extend()
+Stage = class("Stage")
 
 function Stage:new()
     self.area = Area(self)
@@ -12,7 +12,7 @@ function Stage:new()
             self.player = nil
         end
     end)
-    
+
     input:bind("f3", function() camera:shake(4, 60, 1) end)
     input:bind("f5", function()
         if not self.player then
@@ -32,7 +32,7 @@ function Stage:draw()
     love.graphics.setCanvas(self.main_canvas)
     do
         love.graphics.clear()
-        
+
         camera:attach(0, 0, gw, gh)
 
         self.area:draw()

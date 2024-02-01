@@ -5,7 +5,7 @@
 --  + Compat with rxi/classic.lua
 --  + Simple implementation in one class (but not better than other implementations, use with care)
 function class(name, ...)
-    assert(type(name) == 'string', "A name (string) is needed for the new class")
+    assert(type(name) == "string", "A name (string) is needed for the new class")
 
     local supers = { ... }
 
@@ -40,8 +40,8 @@ function class(name, ...)
     class.super = supers[1]
 
     -- Create new class with super is this class, this function help compat with rxi/classic
-    function class.extend(className, ...)
-        className = className or "ChildOf<" .. name .. ">"
+    function class.extend(self, className, ...)
+        className = className or ("ChildOf<" .. name .. ">")
         return _G.class(className, class, ...)
     end
 
