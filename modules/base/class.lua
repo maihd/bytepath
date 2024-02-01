@@ -1,4 +1,12 @@
+-- Create new class
+-- Features:
+--  + Support multi-inherit
+--  + Mixins (https://github.com/a327ex/blog/issues/2)
+--  + Compat with rxi/classic.lua
+--  + Simple implementation in one class (but not better than other implementations, use with care)
 function class(name, ...)
+    assert(type(name) == 'string', "A name (string) is needed for the new class")
+
     local supers = { ... }
 
     local class = {}
@@ -32,8 +40,9 @@ function class(name, ...)
     class.super = supers[1]
 
     -- Create new class with super is this class, this function help compat with rxi/classic
-    function class.extend(...)
-        return _G.class("ChildOf<" .. name .. ">", class, ...)
+    function class.extend(className, ...)
+        className = className or "ChildOf<" .. name .. ">"
+        return _G.class(className, class, ...)
     end
 
     -- Constructor, this function help compat with rxi/classic
@@ -45,5 +54,23 @@ function class(name, ...)
         return name
     end
 
+    -- Check object is-a instance of class
+    function class.is(self, class)
+        local mt = getmetatable(self)
+        if mt == class then
+            return true
+        end
+
+        for _, super in ipairs(supers) do
+            if super == class then
+                return true
+            end
+        end
+
+        return false
+    end
+
     return class
 end
+
+return class
