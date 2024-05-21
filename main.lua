@@ -32,6 +32,7 @@ require "modules.Area"
 require "modules.GameObject"
 
 require "modules.objects.Player"
+require "modules.objects.ShootEffect"
 
 -- Program
 
@@ -167,4 +168,24 @@ function type_name(o)
     end
 
     return global_type_table[getmetatable(o) or 0] or "Unknown"
+end
+
+
+-- Transform utils
+
+
+function pushRotate(x, y, r)
+    love.graphics.push()
+    love.graphics.translate(x, y)
+    love.graphics.rotate(r or 0)
+    love.graphics.translate(-x, -y)
+end
+
+
+function pushRotateScale(x, y, r, sx, sy)
+    love.graphics.push()
+    love.graphics.translate(x, y)
+    love.graphics.rotate(r or 0)
+    love.graphics.scale(sx or 1, sy or sx or 1)
+    love.graphics.translate(-x, -y)
 end

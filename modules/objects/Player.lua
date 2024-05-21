@@ -1,5 +1,6 @@
 Player = class("Player", GameObject)
 
+
 function Player:new(area, x, y, opts)
     Player.super.new(self, area, x, y, opts)
 
@@ -13,7 +14,24 @@ function Player:new(area, x, y, opts)
     self.v = 0
     self.max_v = 100
     self.a = 100
+
+    -- Shooting
+    self.attack_speed = 1
+    self.timer:every(5, function ()
+        self.attack_speed = random(1, 2)
+    end)
+
+    self:prepareShoot()
 end
+
+
+function Player:prepareShoot()
+    self.timer:after(0.24 / self.attack_speed, function ()
+        self:shoot()
+        self:prepareShoot()
+    end)
+end
+
 
 function Player:update(dt)
     Player.super.update(self, dt)
@@ -30,7 +48,22 @@ function Player:update(dt)
     self.collider:setLinearVelocity(self.v * math.cos(self.r), self.v * math.sin(self.r))
 end
 
+
 function Player:draw()
     love.graphics.circle("line", self.x, self.y, self.w)
     love.graphics.line(self.x, self.y, self.x + 2*self.w*math.cos(self.r), self.y + 2*self.w*math.sin(self.r))
+end
+
+
+function Player:shoot()
+    local d = 1.2 * self.w
+
+    self.area:addGameObject("ShootEffect", 
+        self.x + d * math.cos(self.r),
+        self.y + d * math.sin(self.r),
+        {
+            player = self,
+            d = d
+        }
+    )
 end
