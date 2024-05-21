@@ -1,4 +1,4 @@
-Player = GameObject:extend()
+Player = class("Player", GameObject)
 
 function Player:new(area, x, y, opts)
     Player.super.new(self, area, x, y, opts)

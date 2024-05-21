@@ -4,12 +4,18 @@ local keymap = require "core.keymap"
 local console = require "plugins.console"
 
 command.add(nil, {
-    ["project:run-project"] = function ()
+    ["project:run-project"] = function()
         core.log "Running..."
+
+        local prefix = (PLATFORM == "Windows" and "" or "./")
+        local ext = (PLATFORM == "Windows" and ".bat" or ".sh")
+        console.clear()
         console.run {
-          command = "love .",
-          file_pattern = "(.*):(%d+):(%d+): (.*)$",
-          on_complete = function() core.log "Run end!" end,
+            command = prefix .. "start_dev" .. ext,
+            file_pattern = "(.*):(%d+):(%d+): (.*)$",
+            on_complete = function ()
+                core.log "Run complete"
+            end,
         }
     end
 })

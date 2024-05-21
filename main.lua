@@ -1,8 +1,13 @@
+-- Base data structure and runtime
+
+require "modules.base.class"
+
 -- Deps
 
 Func = require "libraries.luafun.fun"
 
-Object = require "libraries.rxi.classic"
+-- Object = require "libraries.rxi.classic"
+Object = class("Object")
 
 Input = require "libraries.input.Input"
 Timer = require "libraries.timer.Timer"
@@ -50,7 +55,7 @@ function love.load()
     input:bind("left", "left")
     input:bind("right", "right")
 
-    input:bind('f1', function()
+    input:bind('f1', function ()
         print("Before collection: " .. collectgarbage("count")/1024)
         collectgarbage()
         print("After collection: " .. collectgarbage("count")/1024)
@@ -60,11 +65,17 @@ function love.load()
         print("-------------------------------------")
     end)
 
+    input:bind('f2', function ()
+        print("Enter Stage room")
+        gotoRoom('Stage', 'Stage')
+    end)
+
     -- Startup
 
     resize(3)
     gotoRoom('Stage', 'Stage')
 end
+
 
 function love.update(dt)
     if current_room then
@@ -74,6 +85,7 @@ function love.update(dt)
     input:update(dt)
     camera:update(dt)
 end
+
 
 function love.draw()
     if current_room then
@@ -85,11 +97,13 @@ function love.draw()
     love.graphics.print("room: " .. (current_room_name or "nil"), 5, 25)
 end
 
+
 function addRoom(room_type, room_name, ...)
     local room = _G[room_type](...)
     rooms[room_name] = room
     return room
 end
+
 
 function gotoRoom(room_type, room_name, ...)
     if current_room and current_room.destroy then
@@ -99,15 +113,18 @@ function gotoRoom(room_type, room_name, ...)
     current_room = _G[room_type](...)
 end
 
+
 function resize(s)
     love.window.setMode(s * gw, s * gh)
     sx, sy = s, s
 end
 
+
 function random(min, max)
     local min, max = min or 0, max or 1
     return (min > max and (love.math.random()*(min - max) + max)) or (love.math.random()*(max - min) + min)
 end
+
 
 function count_all(f)
     local seen = {}
@@ -122,10 +139,11 @@ function count_all(f)
             elseif type(v) == "userdata" then
             f(v)
             end
-    end
+        end
     end
     count_table(_G)
 end
+
 
 function type_count()
     local counts = {}
@@ -137,14 +155,16 @@ function type_count()
     return counts
 end
 
+
 global_type_table = nil
 function type_name(o)
     if global_type_table == nil then
         global_type_table = {}
-            for k,v in pairs(_G) do
+        for k,v in pairs(_G) do
             global_type_table[v] = k
         end
-    global_type_table[0] = "table"
+        global_type_table[0] = "table"
     end
+
     return global_type_table[getmetatable(o) or 0] or "Unknown"
 end

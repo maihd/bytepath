@@ -1,10 +1,10 @@
-GameObject = Object:extend()
+GameObject = class("GameObject")
 
 function GameObject:new(area, x, y, opts)
     local opts = opts or {}
     if opts then
         for k, v in pairs(opts) do
-            self[k] = v 
+            self[k] = v
         end
     end
 
@@ -20,8 +20,8 @@ function GameObject:update(dt)
     if self.timer then
         self.timer:update(dt)
     end
-    
-    if self.collider then 
+
+    if self.collider then
         self.x, self.y = self.collider:getPosition()
     end
 end

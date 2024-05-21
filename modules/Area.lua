@@ -1,4 +1,4 @@
-Area = Object:extend()
+Area = class("Area")
 
 function Area:new(room)
     self.room = room
@@ -39,11 +39,11 @@ function Area:getGameObjects(predicate)
 end
 
 function Area:queryCircleArea(x, y, radius, game_types)
-    return self:getGameObjects(function (game_object) 
+    return self:getGameObjects(function (game_object)
         if Func.index_of(game_object, game_types) then
             local dx = game_object.x - x
             local dy = game_object.y - y
-            return dx * dx + dy * dy <= radius * radius 
+            return dx * dx + dy * dy <= radius * radius
         end
 
         return false
