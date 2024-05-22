@@ -8,7 +8,10 @@ function Stage:new()
 
     input:bind("f4", function()
         if self.player then
-            self.player.dead = true
+            -- self.player.dead = true
+            slow(0.15, 1)
+            
+            self.player:die()
             self.player = nil
         end
     end)

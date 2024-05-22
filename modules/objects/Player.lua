@@ -46,10 +46,16 @@ function Player:update(dt)
 
     self.v = math.min(self.v + self.a * dt, self.max_v)
     self.collider:setLinearVelocity(self.v * math.cos(self.r), self.v * math.sin(self.r))
+
+    if self.x < 0 then self:die() end
+    if self.y < 0 then self:die() end
+    if self.x > gw then self:die() end
+    if self.y > gh then self:die() end
 end
 
 
 function Player:draw()
+    love.graphics.setColor(self.color or default_color)
     love.graphics.circle("line", self.x, self.y, self.w)
     love.graphics.line(self.x, self.y, self.x + 2*self.w*math.cos(self.r), self.y + 2*self.w*math.sin(self.r))
 end
@@ -65,5 +71,55 @@ function Player:shoot()
             player = self,
             d = d
         }
+    ) 
+    
+    self.area:addGameObject("Projectile", 
+        self.x + 1.5 * d * math.cos(self.r), 
+        self.y + 1.5 * d * math.sin(self.r), 
+        {
+            r = self.r
+        }
     )
+    
+    -- Ex87
+    -- self.area:addGameObject("Projectile", 
+    --     self.x + 1.5 * d * math.cos(self.r + math.pi * 0.1), 
+    --     self.y + 1.5 * d * math.sin(self.r + math.pi * 0.1), 
+    --     {
+    --         r = self.r + math.pi * 0.1
+    --     }
+    -- )
+    
+    -- self.area:addGameObject("Projectile", 
+    --     self.x + 1.5 * d * math.cos(self.r - math.pi * 0.1), 
+    --     self.y + 1.5 * d * math.sin(self.r - math.pi * 0.1), 
+    --     {
+    --         r = self.r - math.pi * 0.1
+    --     }
+    -- )
+    
+    -- Ex88
+    -- self.area:addGameObject("Projectile", 
+    --     self.x + 1.5 * d * math.cos(self.r + math.pi * 0.1), 
+    --     self.y + 1.5 * d * math.sin(self.r + math.pi * 0.1), 
+    --     {
+    --         r = self.r
+    --     }
+    -- )
+    
+    -- self.area:addGameObject("Projectile", 
+    --     self.x + 1.5 * d * math.cos(self.r - math.pi * 0.1), 
+    --     self.y + 1.5 * d * math.sin(self.r - math.pi * 0.1), 
+    --     {
+    --         r = self.r
+    --     }
+    -- )
+end
+
+
+function Player:die()
+    self.dead = true 
+    for i = 1, love.math.random(8, 12) do 
+    	self.area:addGameObject("ExplodeParticle", self.x, self.y) 
+  	end
 end

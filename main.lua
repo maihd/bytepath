@@ -27,12 +27,17 @@ require "modules.utils"
 
 -- Game modules
 
+require "modules.constants"
+
 require "modules.rooms.Stage"
 require "modules.Area"
 require "modules.GameObject"
 
 require "modules.objects.Player"
+require "modules.objects.Projectile"
 require "modules.objects.ShootEffect"
+require "modules.objects.ExplodeParticle"
+require "modules.objects.ProjectileDeathEffect"
 
 -- Program
 
@@ -46,6 +51,7 @@ function love.load()
     current_room = nil
     current_room_name = nil
 
+    timer = Timer()
     input = Input()
     camera = Camera()
 
@@ -78,13 +84,23 @@ function love.load()
 end
 
 
+slow_amount = 1.0
+function slow(amount, duration)
+    slow_amount = amount
+    timer:tween(duration, _G, {slow_amount = 1}, 'in-out-cubic')
+end
+
+
 function love.update(dt)
+    dt = dt
+
+    input:update(dt * slow_amount)
+    camera:update(dt * slow_amount)
     if current_room then
-        current_room:update(dt)
+        current_room:update(dt * slow_amount)
     end
 
-    input:update(dt)
-    camera:update(dt)
+    timer:update(dt)
 end
 
 

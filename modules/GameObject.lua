@@ -1,5 +1,6 @@
 GameObject = class("GameObject")
 
+
 function GameObject:new(area, x, y, opts)
     local opts = opts or {}
     if opts then
@@ -16,6 +17,7 @@ function GameObject:new(area, x, y, opts)
     self.timer = Timer()
 end
 
+
 function GameObject:update(dt)
     if self.timer then
         self.timer:update(dt)
@@ -26,9 +28,11 @@ function GameObject:update(dt)
     end
 end
 
+
 function GameObject:draw()
 
 end
+
 
 function GameObject:destroy()
     self.timer:destroy()
@@ -39,3 +43,11 @@ function GameObject:destroy()
     self.timer = nil
     self.collider = nil
 end
+
+
+function GameObject:die()
+    self.dead = true
+end
+
+
+return GameObject

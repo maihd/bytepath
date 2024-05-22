@@ -1,9 +1,11 @@
 Area = class("Area")
 
+
 function Area:new(room)
     self.room = room
     self.game_objects = {}
 end
+
 
 function Area:update(dt)
     if self.world then
@@ -21,11 +23,13 @@ function Area:update(dt)
     end
 end
 
+
 function Area:draw()
     for _, game_object in pairs(self.game_objects) do
         game_object:draw()
     end
 end
+
 
 function Area:addGameObject(game_object_type, x, y, opts)
     local opts = opts or {}
@@ -34,9 +38,11 @@ function Area:addGameObject(game_object_type, x, y, opts)
     return game_object
 end
 
+
 function Area:getGameObjects(predicate)
     return Func.filter(self.game_objects, predicate)
 end
+
 
 function Area:queryCircleArea(x, y, radius, game_types)
     return self:getGameObjects(function (game_object)
@@ -49,6 +55,7 @@ function Area:queryCircleArea(x, y, radius, game_types)
         return false
     end)
 end
+
 
 function Area:getClosestGameObject(x, y, radius, game_types)
     return Func.reduce(self:queryCircleArea(x, y, radius), nil, function (closest_game_object, game_object)
@@ -70,9 +77,11 @@ function Area:getClosestGameObject(x, y, radius, game_types)
     end)
 end
 
+
 function Area:addPhysicsWorld()
     self.world = Physics.newWorld(0, 0, true)
 end
+
 
 function Area:destroy()
     for _, game_object in pairs(self.game_objects) do
@@ -85,3 +94,6 @@ function Area:destroy()
         self.world = nil
     end
 end
+
+
+return Area
