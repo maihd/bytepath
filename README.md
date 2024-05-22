@@ -17,7 +17,7 @@ Progress
 [x] Chapter 3: Room and Areas
 [x] Chapter 4: Excerises
 [x] Chapter 5: Game Basics
-[ ] Chapter 6: Player Basics
+[x] Chapter 6: Player Basics
 [ ] Chapter 7: Player Stats and Attacks
 [ ] Chapter 8: Enemies
 [ ] Chapter 9: Director and Gameplay Loop
