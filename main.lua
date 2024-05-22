@@ -4,7 +4,8 @@ require "modules.base.class"
 
 -- Deps
 
-Func = require "libraries.luafun.fun"
+-- Func = require "libraries.luafun.fun"
+Func = require "libraries.moses.moses"
 
 -- Object = require "libraries.rxi.classic"
 Object = class("Object")
@@ -19,7 +20,7 @@ Physics = require "libraries.windfield"
 
 -- Deps initialization
 
-Func()
+-- Func()
 
 -- utils
 
@@ -34,9 +35,13 @@ require "modules.Area"
 require "modules.GameObject"
 
 require "modules.objects.Player"
-require "modules.objects.Projectile"
+
+require "modules.objects.TickEffect"
 require "modules.objects.ShootEffect"
+require "modules.objects.TrailParticle"
 require "modules.objects.ExplodeParticle"
+
+require "modules.objects.Projectile"
 require "modules.objects.ProjectileDeathEffect"
 
 -- Program
@@ -56,6 +61,11 @@ function love.load()
     camera = Camera()
 
     -- Input bindings
+
+    input:bind("w", "up")
+    input:bind("s", "down")
+    input:bind("up", "up")
+    input:bind("down", "down")
 
     input:bind("a", "left")
     input:bind("d", "right")
